@@ -1,4 +1,4 @@
-# Hackerman
+# Hackerman-3.0
 
 
 ![saucy-gif](hackerman.gif)
@@ -24,21 +24,10 @@ In addition to using the utility panel on the right of the game interface, playe
 
 ### Program usage
 To run the game, execute the program with these flags: <br>
-`Hackerman-2.0 *[resolution_x] [resolution_y]*`
+`Hackerman-3.0 *[resolution_x] [resolution_y]*`
 
 ### Build
 Dependencies :
-* openFrameworks
-* boost
+* TBD
 
-Have openFrameworks and boost libraries installed on your computer and place
-this project directory into your `apps` directory of your openFrameworks build. <br>
-Then to build on Unix-based operating systems use the following commands:
-  <br>
-`cd Hackerman-2.0`
-<br>`make`
-<br>
-
-To then run the program, execute the binary in `Hackerman-2.0/bin/Hackerman-2.0`
-### Inspiration
-Inspiration by classic "hacking" games such as Hacknet, Sunrise Hackathon, etc.
+To then run the program, execute the binary in `Hackerman-3.0/bin/Hackerman-3.0`
