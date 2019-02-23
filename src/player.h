@@ -24,4 +24,6 @@ class Player {
     bool attacked_firewall;
 
     int defense;
+
+    int enemies_defeated;
 };
