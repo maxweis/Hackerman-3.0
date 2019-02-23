@@ -1,7 +1,6 @@
 #include "render.h"
 
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include <SDL2/SDL_image.h>
 #include "game.h"
 #include "panel.h"
 
@@ -43,7 +42,7 @@ void render_console_panel() {
     game.font.draw_bottom_left(console_text.c_str(), game.console.bound.x + BORDER_WIDTH,
             game.console.bound.y + game.console.bound.h - BORDER_WIDTH, render_color);
 
-    for (unsigned i = 0; i < game.console.history.size() && i < game.console.rows; i++) {
+    for (size_t i = 0; i < game.console.history.size() && i < game.console.rows; i++) {
         game.font.draw_bottom_left(game.console.history[i], game.console.bound.x + BORDER_WIDTH,
                 game.console.bound.y + game.console.bound.h - BORDER_WIDTH - (i + 1) * game.font.height,
                 FG_COLOR);

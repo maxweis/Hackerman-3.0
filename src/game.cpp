@@ -1,11 +1,42 @@
 #include "game.h"
 #include <iostream>
+#include <SDL2/SDL_image.h>
 
 Game game = Game();
 
 void Game::init_SDL() {
     if (SDL_Init(SDL_INIT_EVERYTHING)) {
         std::cerr << SDL_GetError() << std::endl;
+    }
+}
+
+void Game::init_enemy_panels() {
+    const int enemy_panel_width = game.screen_width * ENEMY_PANEL_WIDTH_RATIO;
+    const int enemy_panel_height = game.screen_height / ENEMY_AMOUNT;
+
+    for (int i = 0; i < ENEMY_AMOUNT; i++) {
+        SDL_Rect panel_rect = {0, enemy_panel_height * i, enemy_panel_width,
+            enemy_panel_height};
+        Enemy enemy = Enemy(i);
+        game.enemies.push_back(enemy);
+        game.enemy_panels.push_back(EnemyPanel(panel_rect, &game.enemies[i]));
+    }
+}
+
+void Game::init_util_buttons() {
+    const int util_button_w = (game.screen_width * UTIL_BUTTON_WIDTH_RATIO) / UTIL_BUTTON_COLS;
+    const int util_button_h = (game.screen_height - game.console.bound.h) / UTIL_BUTTON_ROWS;
+
+    for (int row = 0; row < UTIL_BUTTON_ROWS; row++) {
+        for (int col = 0; col < UTIL_BUTTON_COLS; col++) {
+            const int util_button_x = game.screen_width - (game.screen_width * UTIL_BUTTON_WIDTH_RATIO) +
+                util_button_w * col;
+            const int util_button_y = row * util_button_h;
+            int button_number = row * UTIL_BUTTON_COLS + col;
+            SDL_Rect bound = {util_button_x, util_button_y, util_button_w, util_button_h};
+            std::string icon_path = UTIL_BUTTON_ICON_PATHS[button_number];
+
+        }
     }
 }
 

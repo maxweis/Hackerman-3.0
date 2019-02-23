@@ -70,8 +70,7 @@ class StatusBar : public Panel {
 class ConsolePanel : public Panel {
   public:
     ConsolePanel() {}
-    ConsolePanel(SDL_Rect bound) : Panel(bound), sh_enabled(false),
-    user_prompted(false) {}
+    ConsolePanel(SDL_Rect bound);
 
     std::deque<std::string> history;
     std::stringstream current_command;
