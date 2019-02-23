@@ -2,25 +2,28 @@
 #include <string>
 #include <sstream>
 #include <iostream>
+#include "game.h"
 #include "maths.h"
 
-//std::string get_random_living_enemy_name() {
-  //std::string name;
-  //int random_enemy_number;
+std::string get_random_living_enemy_name() {
+    Enemy *random_enemy = nullptr;
 
-  //do {
-    //random_enemy_number = ofRandom(0, enemy_panels.size());
-    //name = enemy_panels[random_enemy_number].enemy.name;
-  //} while (enemy_panels[random_enemy_number].enemy.defeated);
+    do {
+        random_enemy = &game.enemies.at(random_int(0, game.enemies.size()));
+    } while (random_enemy && !random_enemy->defeated);
 
-  //return enemy_panels[random_enemy_number].enemy.name;
-//}
+    if (!random_enemy) {
+        return nullptr;
+    }
+
+    return random_enemy->name;
+}
 
 //generate unique random name from name list
 std::string get_random_enemy_name() {
-  static bool name_used[kEnemyNamesAmount] = { false };
+  static bool name_used[ENEMY_NAMES_AMOUNT] = { false };
 
-  if (kEnemyAmount > kEnemyNamesAmount) {
+  if (ENEMY_AMOUNT > ENEMY_NAMES_AMOUNT) {
     std::cerr << "Not enough enemy names for enemy amount" << std::endl;
     exit(1);
   }
@@ -28,13 +31,13 @@ std::string get_random_enemy_name() {
   int random_index;
   //attempt to access unique enemy name
   do {
-    random_index = (int) random_int(0, kEnemyNamesAmount);
+    random_index = (int) random_int(0, ENEMY_NAMES_AMOUNT);
   } while (name_used[random_index]);
 
   //set name as used
   name_used[random_index] = true;
 
-  return kEnemyNames[random_index];
+  return ENEMY_NAMES[random_index];
 }
 
 //return a fake ip string for enemies

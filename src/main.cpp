@@ -1,9 +1,26 @@
 #include "main.h"
 
-int main(int argc, char *argv[]) {
-    if (SDL_Init(SDL_INIT_EVERYTHING)) {
-        std::cerr << SDL_GetError();
+#include <iostream>
+#include <SDL2/SDL.h>
+#include "game.h"
+
+Game game;
+
+void set_window_opts(int argc, char *argv[]) {
+    if (argc > 1) {
+        if (!strcmp(argv[1], "-f")) {
+            game = Game();
+        }
+        else if (!strcmp(argv[1], "-w")) {
+            game = Game(atoi(argv[2]), atoi(argv[3]));
+        }
+    } else {
+        game = Game();
     }
+}
+
+int main(int argc, char *argv[]) {
+    set_window_opts(argc, argv);
 
     bool done = true;
 
@@ -12,4 +29,7 @@ int main(int argc, char *argv[]) {
         while (SDL_PollEvent(&event)) {
         }
     }
+
+    SDL_Quit();
+    return 0;
 }

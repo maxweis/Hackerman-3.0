@@ -38,7 +38,7 @@ class Panel {
     bool has_focus;
 }; 
 
-class UtilButton : Panel {
+class UtilButton : public Panel {
   public:
     UtilButton() : Panel() {}
     UtilButton(SDL_Rect bound) : Panel(bound) {}
@@ -52,7 +52,7 @@ class UtilButton : Panel {
     int number, row, column;
 };
 
-class StatusBar : Panel {
+class StatusBar : public Panel {
   public:
     StatusBar() : Panel(), fill(1) {}
     StatusBar(SDL_Rect bound, float fill) : Panel(bound), fill(fill) {}
@@ -60,7 +60,7 @@ class StatusBar : Panel {
     float fill;
 };
 
-class ConsolePanel : Panel {
+class ConsolePanel : public Panel {
   public:
     ConsolePanel() {}
     ConsolePanel(SDL_Rect bound) : Panel(bound), sh_enabled(false),
@@ -69,6 +69,7 @@ class ConsolePanel : Panel {
     std::deque<std::string> history;
     std::stringstream current_command;
     std::string prompt_answer;
+    unsigned rows;
 
     //access sh shell
     bool sh_enabled;
@@ -77,7 +78,7 @@ class ConsolePanel : Panel {
     std::vector<std::string> sh_exec(std::string cmd);
 };
 
-class EnemyPanel : Panel {
+class EnemyPanel : public Panel {
   public:
     EnemyPanel(SDL_Rect bound, Enemy *enemy)
       : Panel(bound), enemy(enemy) {}

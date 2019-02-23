@@ -9,6 +9,8 @@ class Player {
     Player() : bitcoin(0), password(GetRandomPassword(10)), connected(false),
     firewall_up(true), password_encrypted(false), sh_unlocked(false), defense(1){}
 
+    void update_player();
+
     unsigned bitcoin;
     std::string password;
 

@@ -6,10 +6,10 @@
 std::string get_random_enemy_name();
 std::string get_random_ip_string();
 
-const int kEnemyAmount = 5;
+const int ENEMY_AMOUNT = 5;
 
-const int kEnemyNamesAmount = 17;
-const std::string kEnemyNames[] = {"L33T HX0R", "[spunge]", "Left Handed Jimmy", 
+const int ENEMY_NAMES_AMOUNT = 17;
+const std::string ENEMY_NAMES[] = {"L33T HX0R", "[spunge]", "Left Handed Jimmy", 
 "Sam Hammich", "Dr. Moonshine", "Master Mayhem", "hackin-hecker", "artemis_fowl", "cindy southpaw",
 "bup bup bup", "king jellybean", "flawed_human", "meeseeks", "munk", "lienux",
 "dota_john", "gaudy gus"};
