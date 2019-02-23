@@ -26,17 +26,17 @@ class Enemy {
         firewall_up(other.firewall_up), firewall_attack_time(other.firewall_attack_time),
         firewall_attacked(other.firewall_attacked), defeated(other.defeated) {}
  
-    Enemy(int enemy_number) : name(get_random_enemy_name()), password(GetRandomPassword(5)),
+    Enemy(unsigned enemy_number) : name(get_random_enemy_name()), password(GetRandomPassword(5)),
         number(enemy_number), bitcoin(random_int(1, 3)), ip(get_random_ip_string()),
         firewall_strength(random_int(5, 15)), firewall_up(true), firewall_attack_time(0),
         firewall_attacked(false), defeated(false) {}
 
     std::string name;
     std::string password;
-    int number;
-    int bitcoin;
+    unsigned number;
+    unsigned bitcoin;
     std::string ip;
-    int firewall_strength;
+    unsigned firewall_strength;
     bool firewall_up;
     //time at which firewall will be down
     float firewall_attack_time;

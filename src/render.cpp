@@ -78,6 +78,8 @@ void render_enemy_panels() {
     for (EnemyPanel enemy_panel : game.enemy_panels) {
         SDL_Color panel_color = enemy_panel.has_focus ? WHITE : FG_COLOR;
         draw_hollow_rect(enemy_panel.bound, LINE_WIDTH, panel_color);
+        game.font.draw(std::to_string(enemy_panel.enemy->number), enemy_panel.bound.x,
+                enemy_panel.bound.y, panel_color);
         game.font.draw_align_x(enemy_panel.enemy->name, enemy_panel.bound, 
                 ENEMY_NAME_POS_RATIO, panel_color);
         game.font.draw_align_x(enemy_panel.enemy->ip, enemy_panel.bound,
@@ -92,5 +94,4 @@ void draw_panels() {
     render_util_buttons();
     render_console_panel();
     render_enemy_panels();
-
 }
