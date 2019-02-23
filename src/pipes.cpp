@@ -7,7 +7,7 @@
 #define DEBUG 
 
 bool Point::IsValid() {
-  return x > 0 && y > 0 && x < PipePuzzle::length && y < PipePuzzle::length;
+  return x >= 0 && y >= 0 && x < PipePuzzle::length && y < PipePuzzle::length;
 }
 
 bool Point::operator==(Point& other) {
@@ -81,20 +81,71 @@ void Cell::Rotate() {
   }
 }
 
+bool Cell::IsDirectlyConnected(Cell other) {
+  NeighborList list1 = GetNeighbors(); 
+  NeighborList list2 = other.GetNeighbors();
+
+  bool thisTouchOther = this->pos == list2.p1 || this->pos == list2.p2;
+  bool otherTouchThis = other.pos == list1.p1 || other.pos == list1.p1;
+
+  return thisTouchOther && otherTouchThis;
+}
+
+Cell& Cell::operator=(Cell& other) {
+  this->pos.x = other.pos.x;
+  this->pos.y = other.pos.y;
+
+  return *this;
+}
 PipePuzzle::PipePuzzle() {
-  
+  for (int i = 0; i < length; i++) {
+    for (int j = 0; j < length; j++) {
+      board[i][j].pos.x = i;
+      board[i][j].pos.y = j;
+      board[i][j].cellType = NorthSouth;
+    }
+  }
 }
 bool PipePuzzle::CanReach(Point a, Point b) {
+  //
+  if (a == b) {
+    return true;
+  }
+
+  if (GetPos(a).IsDirectlyConnected(GetPos(b))) {
+    return true;
+  }
+
+  if (GetPos(a).flag) {
+    return false;
+  }
+  GetPos(a).flag = 1;
+  NeighborList list = GetNeighbors(GetPos(a));
+  bool ret1 = CanReach(list.p1,b);
+  bool ret2 = CanReach(list.p2,b);
+
+
+
   
-  return true;
+  return ret1 || ret2;
 }
-PipePuzzle::
 void PipePuzzle::SetType(Point a, CellType t) {
 
+  GetPos(a).cellType = t;
   //do stuff
 }
 
+void PipePuzzle::ClearFlags() {
+  for (int i = 0; i < length; i++) {
+    for (int j = 0; j < length; j++) {
+      board[i][j].flag = 0;
+    }
+  }
+}
 
+Cell& PipePuzzle::GetPos(int x, int y) {
+  return board[x][y];
+}
 Cell& PipePuzzle::GetPos(Point p) {
   assert(p.IsValid());
   int x = p.x;
@@ -104,14 +155,31 @@ Cell& PipePuzzle::GetPos(Point p) {
 }
 
 #ifdef DEBUG
-int main() {
+
+
+void test1() {
+  
   PipePuzzle pp;
 
   Point a(0, 0);
   Point b(0, 1);
+  Point c(0, 2);
+  Point d(1, 1);
   pp.SetType(a, NorthSouth);
   pp.SetType(b, NorthSouth);
+  pp.SetType(c, EastWest);
+  pp.SetType(d, EastWest);
 
+
+  assert(pp.GetPos(a).IsDirectlyConnected(pp.GetPos(b)));
+  assert(!pp.GetPos(b).IsDirectlyConnected(pp.GetPos(c)));
+  assert(!pp.GetPos(a).IsDirectlyConnected(pp.GetPos(d)));
+}
+
+
+void test2() {}
+int main() {
+  test1();
   assert(pp.CanReach(a, b));
 }
 #endif
