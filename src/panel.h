@@ -16,7 +16,12 @@ enum UtilButtonType {
   FILESYSTEM, //access your filesystem
   STORE, //purchase upgrades from store
   FIREWALL_ATTACK, //attack enemy's firewall
-  DECRYPT //decrypt enemy's password once firewall is down
+  DECRYPT, //decrypt enemy's password once firewall is down
+};
+
+enum MainPanelState {
+  FILESYSTEM_STATE,
+  STORE_STATE,
 };
 
 class Panel {
@@ -30,6 +35,8 @@ class Panel {
       text_color(text_color), has_focus(false) {}
 
     virtual void Focus() { has_focus = !has_focus; }
+
+    unsigned state;
 
     SDL_Rect bound;
     SDL_Color bg_color;

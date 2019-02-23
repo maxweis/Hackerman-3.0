@@ -21,6 +21,7 @@ SDL_Rect Font::draw(std::string text, int x, int y, SDL_Color color) {
     SDL_Surface *surface = TTF_RenderText_Solid(ttf_font, text.c_str(), color);
     SDL_Rect bound = {x, y, x + surface->w, y + surface->h};
     render_surface(surface, bound);
+    SDL_FreeSurface(surface);
 
     return bound;
 }
@@ -50,6 +51,7 @@ SDL_Rect Font::draw_bottom_left(std::string text, int x, int y, SDL_Color color)
     SDL_Surface *surface = TTF_RenderText_Solid(ttf_font, text.c_str(), color);
     SDL_Rect bound = {x, y, x + surface->w, y + surface->h};
     render_surface(surface, bound);
+    SDL_FreeSurface(surface);
 
     return bound;
 }

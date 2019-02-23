@@ -23,7 +23,7 @@ void Game::set_resolution(unsigned screen_width, unsigned screen_height) {
 
 void Game::create_window(bool fullscreen) {
     Uint32 flags = fullscreen ? SDL_WINDOW_FULLSCREEN : SDL_WINDOW_RESIZABLE;
-    window = SDL_CreateWindow(GAME_NAME, SDL_WINDOWPOS_CENTERED,
+    window = SDL_CreateWindow(GAME_NAME.c_str(), SDL_WINDOWPOS_CENTERED,
             SDL_WINDOWPOS_CENTERED, screen_width, screen_height, flags);
 }
 
@@ -40,6 +40,8 @@ Game::Game() {
     init_SDL();
     set_native_resolution();
     create_screen(true);
+    font = Font(FONT_PATH, FONT_SIZE);
+    console.rows = (console.bound.h - font.height) / font.height;
 }
 
 Game::Game(unsigned screen_width, unsigned screen_height) {

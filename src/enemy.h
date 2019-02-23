@@ -14,6 +14,9 @@ const std::string ENEMY_NAMES[] = {"L33T HX0R", "[spunge]", "Left Handed Jimmy",
 "bup bup bup", "king jellybean", "flawed_human", "meeseeks", "munk", "lienux",
 "dota_john", "gaudy gus"};
 
+const double ENEMY_NAME_POS_RATIO = 3.0 / 4.0;
+const double ENEMY_IP_POS_RATIO = 1.0 / 3.0;
+
 class Enemy {
   public:
     Enemy() {}

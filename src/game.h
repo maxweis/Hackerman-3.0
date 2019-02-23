@@ -10,9 +10,9 @@
 class Game;
 extern Game game;
 
-#define GAME_NAME "Hackerman-3.0"
-#define FONT_PATH "font/inconsolata.ttf"
-#define FONT_SIZE 14
+const std::string GAME_NAME = "Hackerman-3.0";
+const std::string FONT_PATH = "font/inconsolata.ttf";
+const unsigned FONT_SIZE = 14;
 
 class Game {
     public:
