@@ -23,13 +23,19 @@ struct NeighborList {
   NeighborList(void);
 };
 class Cell {
-  CellType cellType;
-  Point pos;
 
  public:
-
+  bool flag;
+  
+  Point pos;
+  Cell& operator=(Cell& other);
+  CellType cellType;
   
   NeighborList GetNeighbors();
+
+
+  // checks if this and other are connected to each other
+  bool IsDirectlyConnected(Cell other);
   void Rotate();
   
 
@@ -49,7 +55,9 @@ class PipePuzzle {
   void SetType(Point a, CellType t);
   void Regenerate(); //actually changes the pipes
   void Scramble(); //just rotates the pipes
+  void ClearFlags();
   Cell& GetPos(Point a);
+  Cell& GetPos(int x, int y);
   
  private:
   Cell board[length][length];
