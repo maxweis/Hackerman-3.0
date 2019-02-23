@@ -120,7 +120,7 @@ bool PipePuzzle::CanReach(Point a, Point b) {
     return false;
   }
   GetPos(a).flag = 1;
-  NeighborList list = GetNeighbors(GetPos(a));
+  NeighborList list = GetPos(a).GetNeighbors();
   bool ret1 = CanReach(list.p1,b);
   bool ret2 = CanReach(list.p2,b);
 
@@ -180,7 +180,6 @@ void test1() {
 void test2() {}
 int main() {
   test1();
-  assert(pp.CanReach(a, b));
 }
 #endif
 
