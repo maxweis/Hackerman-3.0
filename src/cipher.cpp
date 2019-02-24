@@ -22,6 +22,8 @@ void Cipher_Puzzle::generate_password() {
             password_soln_ += " " + PASSWORD_STRS[rand_idx];
         }
     }
+
+    encrypted_password_ = password_soln_;
 }
 
 void Cipher_Puzzle::cipher_setup() {
@@ -29,15 +31,48 @@ void Cipher_Puzzle::cipher_setup() {
 }
 
 void Cipher_Puzzle::encrypt_password() {
-    unsigned int char_counts[256] = {0};
-    std::vector<char> encrypt_chars;
+    encrypted_password_ = password_soln_;
 
-    for (size_t i = 0; i < password_soln_.size(); i++) {
-        char_counts[(unsigned char)password_soln_[i]]++;
+    std::vector<char> encrypt_chars(num_most_common_, 65);
+    static std::vector<bool> use_status(ENCRYPT_CHARS.size(), false);
+
+    std::vector<char> most_common(num_most_common_, 65);
+    std::vector<unsigned int> counts(256, 0);
+    static std::vector<bool> used_common(256, false);
+    
+    int rand_idx = 0;
+    int count_encrypt = 0;
+    int count_common = 0;
+    int common_idx = 0;
+
+    for (char c: encrypted_password_) {
+        counts[c]++;
     }
 
-    for () {
+    while (count_common != num_most_common_) {
+        for (int i = 0; i < counts.size(); i++) {
+            if (counts[i] > most_common(count_common) && used_common[i] == false) {
+                most_common(count_common) = i;
+                common_idx = i;
+            } 
+        }
 
+        used_common[common_idx] = true;
+        count_common++;
+    }
+
+    while (count_encrypt != num_most_common_) {
+        rand_idx = random_int(0, ENCRYPT_CHARS.size() - 1);
+
+        if (use_status[rand_idx] == false) {
+            encrypt_chars[count_encrypt] = ENCRYPT_CHARS[rand_idx];
+            use_status[rand_idx] = true;
+            count_encrypt++;
+        }
+    }
+
+    for (int i = 0; i < num_most_common_; i++) {
+        this->replaceChar(encrypted_password_, most_common[i], encrypt_chars[i]);
     }
 }
 
