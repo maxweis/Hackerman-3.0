@@ -1,6 +1,7 @@
 
 
 #include <cassert>
+#include <random>
 #include "pipes.h"
 
 
@@ -157,6 +158,36 @@ Cell& PipePuzzle::GetPos(Point p) {
   return board[x][y];
 }
 
+std::random_device rd;     // only used once to initialise (seed) engine
+std::mt19937 rng(rd());    // random-number engine used (Mersenne-Twister in this case)
+void PipePuzzle::Regenerate() {
+  std::uniform_int_distribution<int> uni(0,5); // guaranteed unbiased
+  while(!IsSolved()) {
+    
+    for (int i = 0; i < length; i++) {
+      for (int j = 0; j < length; j++) {
+        GetPos(i, j).cellType = (CellType) uni(rng);
+      }
+    }
+  }
+  Scramble();
+}
+
+void PipePuzzle::Scramble() {
+
+  std::uniform_int_distribution<int> uni(0,3); // guaranteed unbiased
+
+  for (int i = 0; i < length; i++) {
+    for (int j = 0; j < length; j++) {
+        int limit = uni(rng); 
+      for (int k = 0; k < limit; k++) {
+        
+        GetPos(i, j).Rotate();
+      }
+    }
+  }
+}
+
 
 bool PipePuzzle::IsSolved() {
   ClearFlags();
@@ -174,6 +205,8 @@ bool PipePuzzle::IsSolved() {
 
 #ifdef DEBUG
 #include <iostream>
+
+const std::string s = "hellod arknes my old friend";
 
 void printPuz(PipePuzzle& pp) {
   std::cout << "====BOARD START=====" << std::endl;
@@ -221,9 +254,24 @@ void test2() {
 
   
 }
+
+void test3() {
+  
+  PipePuzzle pp; 
+
+  pp.Regenerate();
+  printPuz(pp);
+
+  pp.Regenerate();
+  printPuz(pp);
+
+  
+}
 int main() {
+  std::cout << s << std::endl;
   test1();
   test2();
+  test3();
 }
 #endif
 
