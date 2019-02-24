@@ -43,11 +43,8 @@ class Cell {
 
 class PipePuzzle {
 
-  
-  
-
  public:
-  static const int length = 10;
+  static const int length = 5;
   PipePuzzle (); 
   bool CanReach(Point a, Point b);
 
@@ -56,6 +53,8 @@ class PipePuzzle {
   void Regenerate(); //actually changes the pipes
   void Scramble(); //just rotates the pipes
   void ClearFlags();
+
+  bool IsSolved();
   Cell& GetPos(Point a);
   Cell& GetPos(int x, int y);
   

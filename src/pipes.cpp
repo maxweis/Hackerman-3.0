@@ -111,6 +111,9 @@ bool PipePuzzle::CanReach(Point a, Point b) {
   if (a == b) {
     return true;
   }
+  if (!a.IsValid() || !b.IsValid()) {
+    return false;
+  }
 
   if (GetPos(a).IsDirectlyConnected(GetPos(b))) {
     return true;
@@ -154,9 +157,34 @@ Cell& PipePuzzle::GetPos(Point p) {
   return board[x][y];
 }
 
+
+bool PipePuzzle::IsSolved() {
+  ClearFlags();
+
+  Cell begin = GetPos(0, length / 2 );
+  Cell end = GetPos(length - 1, length / 2 );
+
+  bool connectedToBegin = begin.cellType == NorthWest || begin.cellType == SouthWest || begin.cellType == EastWest;
+  bool connectedToEnd = begin.cellType == NorthEast || begin.cellType == SouthEast || begin.cellType == EastWest;
+
+  return connectedToBegin && connectedToEnd && CanReach(begin.pos, end.pos);
+}
+
+
+
 #ifdef DEBUG
+#include <iostream>
 
-
+void printPuz(PipePuzzle& pp) {
+  std::cout << "====BOARD START=====" << std::endl;
+  for (int y = PipePuzzle::length - 1; y >= 0; y--) {
+    for (int x = 0; x < PipePuzzle::length; x++) {
+      std::cout << pp.GetPos(x, y).cellType;
+    }
+    std::cout << std::endl;
+  }
+  std::cout << "====BOARD END=====" << std::endl;
+}
 void test1() {
   
   PipePuzzle pp;
@@ -164,7 +192,7 @@ void test1() {
   Point a(0, 0);
   Point b(0, 1);
   Point c(0, 2);
-  Point d(1, 1);
+  Point d(1, 1); 
   pp.SetType(a, NorthSouth);
   pp.SetType(b, NorthSouth);
   pp.SetType(c, EastWest);
@@ -174,12 +202,28 @@ void test1() {
   assert(pp.GetPos(a).IsDirectlyConnected(pp.GetPos(b)));
   assert(!pp.GetPos(b).IsDirectlyConnected(pp.GetPos(c)));
   assert(!pp.GetPos(a).IsDirectlyConnected(pp.GetPos(d)));
+  printPuz(pp);
 }
 
 
-void test2() {}
+
+
+void test2() {
+  PipePuzzle pp; 
+
+  for (int i = 0; i < PipePuzzle::length; i++) {
+    pp.SetType(Point(i, PipePuzzle::length / 2), EastWest);
+  }
+
+
+  printPuz(pp);
+  assert(pp.IsSolved());
+
+  
+}
 int main() {
   test1();
+  test2();
 }
 #endif
 
