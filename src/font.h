@@ -5,7 +5,7 @@
 
 class Font {
     public:
-        Font();
+        Font() {}
         Font(std::string font_path, unsigned font_size);
         ~Font();
 

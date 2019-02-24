@@ -11,6 +11,7 @@ Font::Font(std::string font_path, unsigned font_size) {
 
     ttf_font = TTF_OpenFont(font_path.c_str(), font_size);
     if (!ttf_font) {
+        std::cerr << font_path << std::endl;
         std::cerr << TTF_GetError() << std::endl;
         exit(2);
     }
