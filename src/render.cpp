@@ -1,7 +1,6 @@
 #include "render.h"
 
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include "panel.h"
 #include "filesystem.h"
 #include "store.h"
 #include "game.h"

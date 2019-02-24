@@ -5,6 +5,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "font.h"
+#include "enemy.h"
 
 class Enemy;
 class Panel;

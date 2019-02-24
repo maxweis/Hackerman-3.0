@@ -1,7 +1,6 @@
 #include "game.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
-#include "font.h"
 
 void init_SDL() {
     if (SDL_Init(SDL_INIT_EVERYTHING)) {

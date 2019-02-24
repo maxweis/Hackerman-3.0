@@ -5,6 +5,8 @@
 #include "maths.h"
 #include "game.h"
 
+extern Game game;
+
 std::string get_random_living_enemy_name() {
     Enemy *random_enemy = nullptr;
 

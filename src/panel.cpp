@@ -2,6 +2,8 @@
 
 #include "game.h"
 
+extern Game game;
+
 ConsolePanel::ConsolePanel(SDL_Rect bound) : Panel(bound), sh_enabled(false), user_prompted(false) {
     const int console_width = game.screen_width - game.enemy_panels[0].bound.w;
     const int console_height = game.screen_height * CONSOLE_PANEL_HEIGHT_RATIO;
