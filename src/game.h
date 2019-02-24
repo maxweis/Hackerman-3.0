@@ -2,13 +2,12 @@
 
 #include "panel.h"
 #include <vector>
-#include <list>
 #include <string>
 #include <SDL2/SDL.h>
 #include "font.h"
 
-class Game;
-extern Game game;
+class Enemy;
+class Panel;
 
 const std::string GAME_NAME = "Hackerman-3.0";
 const std::string FONT_PATH = "font/inconsolata.ttf";
@@ -28,7 +27,7 @@ class Game {
 
         Panel main;
         ConsolePanel console;
-        std::list<EnemyPanel> enemy_panels;
+        std::vector<EnemyPanel> enemy_panels;
         std::vector<UtilButton> util_buttons;
 
         unsigned screen_width;
@@ -37,7 +36,10 @@ class Game {
         Game& operator=(const Game &other) { return *this; };
 
     private:
-        void init_SDL();
+        void init_enemy_panels();
+        void init_util_buttons();
+        void init_main_panel();
+        void init_panels();
         void set_native_resolution();
         void set_resolution(unsigned screen_width, unsigned screen_height);
         void create_window(bool fullscreen);

@@ -2,7 +2,6 @@
 
 #include "player.h"
 #include "maths.h"
-#include "game.h"
 
 std::string get_random_enemy_name();
 std::string get_random_ip_string();
@@ -17,7 +16,6 @@ const std::string ENEMY_NAMES[] = {"L33T HX0R", "[spunge]", "Left Handed Jimmy",
 
 const double ENEMY_NAME_POS_RATIO = 3.0 / 4.0;
 const double ENEMY_IP_POS_RATIO = 1.0 / 3.0;
-const double ENEMY_PANEL_WIDTH = game.screen_width;
 
 class Enemy {
   public:

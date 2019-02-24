@@ -1,8 +1,14 @@
 #include "render.h"
 
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include "game.h"
 #include "panel.h"
+#include "filesystem.h"
+#include "store.h"
+#include "game.h"
+#include "font.h"
+#include "enemy.h"
+
+extern Game game;
 
 const SDL_Color FG_COLOR = {0, 255, 0, 255};
 const SDL_Color BG_COLOR = {0, 0, 0, 255};
@@ -52,9 +58,7 @@ void render_console_panel() {
 void render_util_buttons() {
     for (UtilButton button : game.util_buttons) {
         draw_hollow_rect(button.bound, LINE_WIDTH, FG_COLOR);
-        if (button.image) {
-            render_surface(button.image, button.bound);
-        }
+        button.image.draw(&button.bound);
     }
 }
 
