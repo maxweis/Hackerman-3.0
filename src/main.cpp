@@ -3,6 +3,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "game.h"
+#include "render.h"
 
 Game game;
 
@@ -24,14 +25,15 @@ int main(int argc, char *argv[]) {
 
     bool done = true;
 
-    while (!done) {
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            if (event.type == SDL_QUIT) {
-                return 0;
-            }
-        }
-    }
+    //while (!done) {
+        //SDL_Event event;
+        //while (SDL_PollEvent(&event)) {
+            //if (event.type == SDL_QUIT) {
+                //return 0;
+            //}
+        //}
+        //draw_panels();
+    //}
 
     SDL_Quit();
     return 0;

@@ -104,5 +104,5 @@ const int UTIL_BUTTON_ROWS = 4;
 const int UTIL_BUTTON_COLS = 2;
 const int UTIL_BUTTON_AMOUNT = UTIL_BUTTON_ROWS * UTIL_BUTTON_COLS;
 const float UTIL_BUTTON_WIDTH_RATIO = 1.0 / 5.0;
-const std::vector<std::string> UTIL_BUTTON_ICON_PATHS = {"icons/connect.png", "icons/disconnect.png", "icons/firewall_up.png", "icons/encrypt.png",
-"icons/files.png", "icons/bitcoin.png", "icons/firewall_attack.png", "icons/decrypt.png"};
+const std::vector<std::string> UTIL_BUTTON_ICON_PATHS = {"assets/icons/connect.png", "assets/icons/disconnect.png", "assets/icons/firewall_up.png", "assets/icons/encrypt.png",
+"assets/icons/files.png", "assets/icons/bitcoin.png", "assets/icons/firewall_attack.png", "assets/icons/decrypt.png"};

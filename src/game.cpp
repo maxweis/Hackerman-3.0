@@ -2,17 +2,19 @@
 #include <iostream>
 #include <SDL2/SDL_image.h>
 
+const std::string GAME_NAME = "Hackerman-3.0";
+#define FONT_PATH "assets/font/inconsolata.ttf"
+#define FONT_SIZE 14
+
 void init_SDL() {
     if (SDL_Init(SDL_INIT_EVERYTHING)) {
         std::cerr << SDL_GetError() << std::endl;
+        exit(2);
     }
 }
 
 void init_SDL_image() {
-    if (IMG_Init(IMG_INIT_PNG)) {
-        std::cerr << IMG_GetError() << std::endl;
-        exit(3);
-    }
+    IMG_Init(IMG_INIT_PNG);
 }
 
 void Game::init_enemy_panels() {
@@ -40,7 +42,6 @@ void Game::init_util_buttons() {
             int button_number = row * UTIL_BUTTON_COLS + col;
             SDL_Rect bound = {util_button_x, util_button_y, util_button_w, util_button_h};
             std::string icon_path = UTIL_BUTTON_ICON_PATHS[button_number];
-            Image image(icon_path);
             util_buttons.push_back(UtilButton(bound, icon_path));
         }
     }

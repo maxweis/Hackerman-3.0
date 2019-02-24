@@ -10,3 +10,4 @@ extern const unsigned LINE_WIDTH;
 extern const unsigned BORDER_WIDTH;
 
 void render_surface(SDL_Surface *surface, SDL_Rect bound);
+void draw_panels();

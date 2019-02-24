@@ -7,16 +7,11 @@
 #include "font.h"
 #include "enemy.h"
 
-class Enemy;
 class Panel;
-
-const std::string GAME_NAME = "Hackerman-3.0";
-const std::string FONT_PATH = "font/inconsolata.ttf";
-const unsigned FONT_SIZE = 14;
 
 class Game {
     public:
-        Game();
+        Game(); 
         ~Game();
         Game(unsigned screen_width, unsigned screen_height);
 
