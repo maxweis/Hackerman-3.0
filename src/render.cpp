@@ -1,9 +1,13 @@
 #include "render.h"
 
 #include <SDL2/SDL2_gfxPrimitives.h>
-#include <SDL2/SDL_image.h>
+#include "filesystem.h"
+#include "store.h"
 #include "game.h"
-#include "panel.h"
+#include "font.h"
+#include "enemy.h"
+
+extern Game game;
 
 const SDL_Color FG_COLOR = {0, 255, 0, 255};
 const SDL_Color BG_COLOR = {0, 0, 0, 255};
@@ -43,7 +47,7 @@ void render_console_panel() {
     game.font.draw_bottom_left(console_text.c_str(), game.console.bound.x + BORDER_WIDTH,
             game.console.bound.y + game.console.bound.h - BORDER_WIDTH, render_color);
 
-    for (unsigned i = 0; i < game.console.history.size() && i < game.console.rows; i++) {
+    for (size_t i = 0; i < game.console.history.size() && i < game.console.rows; i++) {
         game.font.draw_bottom_left(game.console.history[i], game.console.bound.x + BORDER_WIDTH,
                 game.console.bound.y + game.console.bound.h - BORDER_WIDTH - (i + 1) * game.font.height,
                 FG_COLOR);
@@ -53,9 +57,7 @@ void render_console_panel() {
 void render_util_buttons() {
     for (UtilButton button : game.util_buttons) {
         draw_hollow_rect(button.bound, LINE_WIDTH, FG_COLOR);
-        if (button.image) {
-            render_surface(button.image, button.bound);
-        }
+        button.image.draw(&button.bound);
     }
 }
 

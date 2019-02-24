@@ -18,7 +18,7 @@ const std::vector<std::string> PASSWORD_STRS = {"save", "gaping", "leap", "pleas
                                                 "copper", "thing", "crime", "ray", "cow",
                                                 "paint", "wool", "climb", "giant", "odd"};
 
-const std::vector<char> ENCRYPT_CHARS = {};
+const std::vector<char> ENCRYPT_CHARS = {231, 248, 254, 240, 167, 186, 189, 200, 215, 218, 223, 228, 230};
 
 class Cipher_Puzzle {
   public:

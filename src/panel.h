@@ -6,7 +6,9 @@
 #include <sstream>
 #include <SDL2/SDL.h>
 #include "render.h"
-#include "enemy.h"
+#include "image.h"
+
+class Enemy;
 
 enum UtilButtonType {
   CONNECT, //connect to enemies
@@ -34,8 +36,6 @@ class Panel {
       bound(bound), bg_color(bg_color), 
       text_color(text_color), has_focus(false) {}
 
-    virtual void Focus() { has_focus = !has_focus; }
-
     unsigned state;
 
     SDL_Rect bound;
@@ -49,12 +49,14 @@ class UtilButton : public Panel {
   public:
     UtilButton() : Panel() {}
     UtilButton(SDL_Rect bound) : Panel(bound) {}
+    UtilButton(SDL_Rect bound, std::string image_path) : Panel(bound), 
+      image(Image(image_path)) {}
     UtilButton(SDL_Rect bound, SDL_Color bg_color,
-        SDL_Color text_color, SDL_Surface *image)
-      : Panel(bound, bg_color, text_color), image(image) {}
+        SDL_Color text_color, std::string image_path)
+      : Panel(bound, bg_color, text_color), image(Image(image_path)) {}
 
     UtilButtonType type;
-    SDL_Surface *image;
+    Image image;
 
     int number, row, column;
 };
@@ -70,8 +72,7 @@ class StatusBar : public Panel {
 class ConsolePanel : public Panel {
   public:
     ConsolePanel() {}
-    ConsolePanel(SDL_Rect bound) : Panel(bound), sh_enabled(false),
-    user_prompted(false) {}
+    ConsolePanel(SDL_Rect bound);
 
     std::deque<std::string> history;
     std::stringstream current_command;
@@ -90,20 +91,18 @@ class EnemyPanel : public Panel {
     EnemyPanel(SDL_Rect bound, Enemy *enemy)
       : Panel(bound), enemy(enemy) {}
 
-    void Focus() override;
-
     Enemy *enemy;
 };
 
 //percentage of screen enemy panel takes up horizontally
-float ENEMY_PANEL_WIDTH_RATIO = 1.0 / 5.0;
+const float ENEMY_PANEL_WIDTH_RATIO = 1.0 / 5.0;
 
 //percentage of screen console takes up vertically
-float CONSOLE_PANEL_HEIGHT_RATIO = 3.0 / 10.0;
+const float CONSOLE_PANEL_HEIGHT_RATIO = 3.0 / 10.0;
 
-int const UTIL_BUTTON_ROWS = 4;
-int const UTIL_BUTTON_COLS = 2;
-int const UTIL_BUTTON_AMOUNT = UTIL_BUTTON_ROWS * UTIL_BUTTON_COLS;
-float const UTIL_BUTTON_WIDTH_RATIO = 1.0 / 5.0;
+const int UTIL_BUTTON_ROWS = 4;
+const int UTIL_BUTTON_COLS = 2;
+const int UTIL_BUTTON_AMOUNT = UTIL_BUTTON_ROWS * UTIL_BUTTON_COLS;
+const float UTIL_BUTTON_WIDTH_RATIO = 1.0 / 5.0;
 const std::vector<std::string> UTIL_BUTTON_ICON_PATHS = {"icons/connect.png", "icons/disconnect.png", "icons/firewall_up.png", "icons/encrypt.png",
 "icons/files.png", "icons/bitcoin.png", "icons/firewall_attack.png", "icons/decrypt.png"};

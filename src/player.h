@@ -25,5 +25,5 @@ class Player {
 
     int defense;
 
-    int enemies_defeated;
+    unsigned enemies_defeated;
 };

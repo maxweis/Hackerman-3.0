@@ -1,6 +1,6 @@
 #pragma once
 
-#include "player.h"
+#include <iostream>
 #include "maths.h"
 
 std::string get_random_enemy_name();
@@ -26,7 +26,7 @@ class Enemy {
         firewall_up(other.firewall_up), firewall_attack_time(other.firewall_attack_time),
         firewall_attacked(other.firewall_attacked), defeated(other.defeated) {}
  
-    Enemy(unsigned enemy_number) : name(get_random_enemy_name()), password(GetRandomPassword(5)),
+    Enemy(unsigned enemy_number) : name(get_random_enemy_name()), password(get_random_enemy_name()),
         number(enemy_number), bitcoin(random_int(1, 3)), ip(get_random_ip_string()),
         firewall_strength(random_int(5, 15)), firewall_up(true), firewall_attack_time(0),
         firewall_attacked(false), defeated(false) {}

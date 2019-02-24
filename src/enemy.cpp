@@ -2,14 +2,16 @@
 #include <string>
 #include <sstream>
 #include <iostream>
-#include "game.h"
 #include "maths.h"
+#include "game.h"
+
+extern Game game;
 
 std::string get_random_living_enemy_name() {
     Enemy *random_enemy = nullptr;
 
     do {
-        random_enemy = &game.enemies.at(random_int(0, game.enemies.size()));
+        random_enemy = &game.enemies[random_int(0, game.enemies.size())];
     } while (random_enemy && !random_enemy->defeated);
 
     if (!random_enemy) {
